@@ -1,0 +1,52 @@
+def get_response(user_input):
+    # Define some basic responses
+    responses = {
+        "hello": "Hi there! How can I help you today?",
+        "how are you": "I'm just a bot, but I'm doing great! How about you?",
+        "what is your name": "I am a chatbot created by OpenAI.",
+        "bye": "Goodbye! Have a great day!",
+        "default": "Sorry, I didn't understand that. Can you please rephrase?"
+    }
+    
+    # Normalize user input to lowercase
+    user_input = user_input.lower()
+    
+    # Return the appropriate response or default response
+    return responses.get(user_input, responses["default"])
+
+def chat():
+    print("Welcome to the chatbot! Type 'bye' to end the chat.")
+    
+    while True:
+        # Get user input
+        user_input = input("You: ")
+        
+        # Check for exit condition
+        if user_input.lower() == 'bye':
+            print("Chatbot: Goodbye! Have a great day!")
+            break
+        
+        # Get and print the chatbot's response
+        response = get_response(user_input)
+        print(f"Chatbot: {response}")
+
+if __name__ == "__main__":
+    chat()
+
+
+
+
+
+
+output:-
+
+Welcome to the chatbot! Type 'bye' to end the chat.
+You: hello
+Chatbot: Hi there! How can I help you today?
+You: how are you
+Chatbot: I'm just a bot, but I'm doing great! How about you?
+You: what is your name
+Chatbot: I am a chatbot created by OpenAI.
+You: bye
+Chatbot: Goodbye! Have a great day!
+
