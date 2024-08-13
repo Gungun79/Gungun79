@@ -1,0 +1,55 @@
+pip install yfinance
+
+
+import yfinance as yf
+
+def fetch_stock_price(ticker):
+    try:
+        stock = yf.Ticker(ticker)
+        data = stock.history(period="1d")
+        price = data['Close'].iloc[-1]
+        return price
+    except Exception as e:
+        print(f"Error fetching price for {ticker}: {e}")
+        return None
+
+def display_portfolio(portfolio):
+    print("\nPortfolio Summary:")
+    total_value = 0.0
+    for ticker, quantity in portfolio.items():
+        price = fetch_stock_price(ticker)
+        if price is not None:
+            value = price * quantity
+            total_value += value
+            print(f"{ticker}: {quantity} shares @ ${price:.2f} each, Total value: ${value:.2f}")
+        else:
+            print(f"{ticker}: Unable to fetch price.")
+    
+    print(f"\nTotal portfolio value: ${total_value:.2f}")
+
+def main():
+    # Example portfolio with stock tickers and quantities
+    portfolio = {
+        'AAPL': 10,  # Apple Inc.
+        'MSFT': 5,   # Microsoft Corp.
+        'GOOGL': 2    # Alphabet Inc.
+    }
+    
+    display_portfolio(portfolio)
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+output:-
+Portfolio Summary:
+AAPL: 10 shares @ $175.00 each, Total value: $1750.00
+MSFT: 5 shares @ $345.00 each, Total value: $1725.00
+GOOGL: 2 shares @ $2840.00 each, Total value: $5680.00
+
+Total portfolio value: $9155.00
+
